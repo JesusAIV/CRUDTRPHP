@@ -40,5 +40,9 @@ require_once "core/constantes.php";
     <div class="height-100 bg-light">
         <?php require_once $vistas; ?>
     </div>
+
+    <?php
+        endif;
+    ?>
 </body>
 </html>
