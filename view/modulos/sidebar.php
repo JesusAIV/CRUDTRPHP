@@ -14,19 +14,19 @@
                 <span class="nav_logo-name">Logo</span>
             </a>
             <div class="nav_list">
-                <a href="" class="nav_link active">
+                <a href="<?php echo SERVERURL; ?>informes" class="nav_link active">
                     <i class="fa-regular fa-file-chart-pie"></i>
                     <span>Informes</span>
                 </a>
-                <a href="" class="nav_link">
+                <a href="<?php echo SERVERURL; ?>compras" class="nav_link">
                     <i class="fa-regular fa-bag-shopping"></i>
                     <span>Compras</span>
                 </a>
-                <a href="" class="nav_link">
+                <a href="<?php echo SERVERURL; ?>ventas" class="nav_link">
                     <i class="fa-regular fa-cart-shopping"></i>
                     <span>Ventas</span>
                 </a>
-                <a href="" class="nav_link">
+                <a href="<?php echo SERVERURL; ?>almacen" class="nav_link">
                     <i class="fa-regular fa-shop"></i>
                     <span>Almacen</span>
                 </a>
