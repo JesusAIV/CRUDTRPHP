@@ -25,9 +25,15 @@ require_once "core/constantes.php";
         $view = new viewcontroller();
         $vistas = $view->obtenervistacontrolador();
 
-        if ($vistas == "inicio") {
-            $vistas = "./view/content/inicio.php";
-        }
+        if ($vistas == "login") :
+            require_once "./view/content/login.php";
+        else :
+            require_once "./controller/logincontrolador.php";
+            $control = new logincontrolador();
+            $stat = $control->cuentaDeshabilitada($_SESSION['jharid']);
+            if (!isset($_SESSION['usuario']) || $stat == 0) {
+                $control->forzar_cierre_sesion();
+            }
     ?>
 
     <?php include "modulos/sidebar.php"; ?>
