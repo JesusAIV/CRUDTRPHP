@@ -8,8 +8,8 @@ class Conexion{
         $host="localhost";
         $user="root";
         $pass="";
-
-        $bd="BASE";
+        
+        $bd="basededatos";
 
         $con=mysqli_connect($host,$user,$pass);
 

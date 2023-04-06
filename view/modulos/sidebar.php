@@ -15,16 +15,20 @@
             </a>
             <div class="nav_list">
                 <a href="" class="nav_link active">
-                    <i class="fa-regular fa-house"></i>
-                    <span>Inicio</span>
+                    <i class="fa-regular fa-file-chart-pie"></i>
+                    <span>Informes</span>
                 </a>
                 <a href="" class="nav_link">
-                    <i class="fa-regular fa-shop"></i>
-                    <span>Almacen</span>
+                    <i class="fa-regular fa-bag-shopping"></i>
+                    <span>Compras</span>
                 </a>
                 <a href="" class="nav_link">
                     <i class="fa-regular fa-cart-shopping"></i>
                     <span>Ventas</span>
+                </a>
+                <a href="" class="nav_link">
+                    <i class="fa-regular fa-shop"></i>
+                    <span>Almacen</span>
                 </a>
             </div>
         </div>
