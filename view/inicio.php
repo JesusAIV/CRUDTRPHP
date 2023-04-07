@@ -1,5 +1,6 @@
 <?php
 require_once "core/constantes.php";
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,8 @@ require_once "core/constantes.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="<?php echo SERVERURL ?>view/css/style.css" />
     <script src="<?php echo SERVERURL ?>view/js/sidebar.js"></script>
+    <script src="<?php echo SERVERURL ?>view/js/sweetalert2.js"></script>
+    <script async defer src="<?php echo SERVERURL;?>view/js/ajax.js"></script>
 </head>
 
 <body id="body-pd">
@@ -30,7 +33,7 @@ require_once "core/constantes.php";
         else :
             require_once "./controller/loginController.php";
             $control = new logincontrolador();
-            if (!isset($_SESSION['usuario']) || $stat == 0) {
+            if (!isset($_SESSION['usuario'])) {
                 $control->forzar_cierre_sesion();
             }
     ?>
@@ -41,6 +44,7 @@ require_once "core/constantes.php";
     </div>
 
     <?php
+        include "./view/modulos/logout.php";
         endif;
     ?>
 </body>

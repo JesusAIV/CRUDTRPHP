@@ -6,7 +6,7 @@ class mainModel{
         $host = "127.0.0.1";
         $username = "root";
         $pass = "";
-        $database = "jhardsystex";
+        $database = "tgestiona";
         $conexion = mysqli_connect($host,$username,$pass,$database);
 
         // retorna la conexion
@@ -20,11 +20,11 @@ class mainModel{
         return $respuesta;
     }
     // Función para eliminar cuenta
-    protected function eliminar_cuenta($codigo){
+    /*protected function eliminar_cuenta($codigo){
         $sql = "DELETE FROM participante WHERE DNI='$codigo'";
         $consulta = self::conexion()->query($sql);
         return $consulta;
-    }
+    }*/
     // Funcion publica para Encriptar
     public static function encryption($string){
         $output = FALSE;

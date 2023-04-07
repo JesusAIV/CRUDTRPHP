@@ -32,7 +32,7 @@
                 </a>
             </div>
         </div>
-        <a href="#" class="nav_link">
+        <a href="#" class="nav_link btn-exit">
             <i class="fa-regular fa-right-from-bracket"></i>
             <span class="nav_name">Cerrar sesion</span>
         </a>

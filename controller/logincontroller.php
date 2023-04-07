@@ -49,6 +49,7 @@
                 }
             }
         }
+        
         public function forzar_cierre_sesion(){
             session_destroy();
             return header("Location: ".SERVERURL."login");

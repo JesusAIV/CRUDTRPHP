@@ -1,16 +1,16 @@
 <?php
     class viewmodel{
         protected function obtenervistamodelo($views){
-            $lista = ["inicio", "login"];
+            $lista = ["inicio"];
 
             if(in_array($views,$lista)){
                 if(is_file("./view/content/".$views.".php")){
                     $contenido = "./view/content/".$views.".php";
                 }else{
-                    $contenido = "inicio";
+                    $contenido = "login";
                 }
             }else{
-                $contenido = "inicio";
+                $contenido = "login";
             }
             return $contenido;
         }
