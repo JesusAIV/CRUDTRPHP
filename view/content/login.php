@@ -1,30 +1,26 @@
-<div class="login-container">
-    <!-- registrarse-->
-    <div class="container-imgLogin">
-        <img class="imgLogin" src="<?php echo SERVERURL;?>view/assets/img/img.png" alt="">
-    </div>
-    <div class="separador"></div>
+<div class="container">
     <!-- ingresar  -->
-    <div class="login" id="login">
-        <h1 class="">INICIAR SESIÓN</h1>
-        <form class="" action="" method="POST">
-            <div class="form-login">
-                <div class="form-group">
-                    <label for="Usuario">Usuario</label>
-                    <input class="inputt" type="text" name="usuario" id="Usuario">
-                </div>
-                <div class="form-group">
-                    <label for="Contraseña">Contraseña</label>
-                    <input class="inputt" type="password" name="clave" id="Contraseña">
-                </div>
-                <button class="btnIngresar" name="btnIngresar" type="submit" value="Ingresar">Ingresar</button>
-                <div class="text-center">
-                    <a class="links" href="./cambiarContraseña.php" >Olvido la contraseña?</a>
-                </div>
-                </div>
-            </form>
-            <?php echo SERVERURL; ?>
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-10">
+            <div class="wrap">
+                <form class="" action="" method="POST">
+                    <div class="row mb-4">
+                        <label for="Usuario" class="col-sm-2 col-form-label">Usuario</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="usuario" id="Usuario">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Contraseña" class="col-sm-2 col-form-label">Contraseña</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="password" name="clave" id="Contraseña">
+                        </div>              
+                    </div>
+                    <button class="btn btn-primary" name="btnIngresar" type="submit" value="Ingresar">Ingresar</button>
+                </form>
+            </div>
         </div>
+            
     </div>
 </div>
 <?php
