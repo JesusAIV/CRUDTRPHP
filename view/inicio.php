@@ -28,9 +28,8 @@ require_once "core/constantes.php";
         if ($vistas == "login") :
             require_once "./view/content/login.php";
         else :
-            require_once "./controller/logincontrolador.php";
+            require_once "./controller/loginController.php";
             $control = new logincontrolador();
-            $stat = $control->cuentaDeshabilitada($_SESSION['jharid']);
             if (!isset($_SESSION['usuario']) || $stat == 0) {
                 $control->forzar_cierre_sesion();
             }

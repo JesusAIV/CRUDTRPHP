@@ -1,8 +1,8 @@
 <?php
-    if ($Ajax){
-        require_once "../model/loginModel.php";
+    if ($ajax){
+        require_once "../models/loginModel.php";
     } else {
-        require_once "./model/loginModel.php";
+        require_once "./models/loginModel.php";
     }
 
     class logincontrolador extends LoginModel{

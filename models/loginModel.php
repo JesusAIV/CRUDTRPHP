@@ -1,5 +1,5 @@
 <?php
-    if ($Ajax){
+    if ($ajax){
         require_once "../view/core/mainModel.php";
     } else {
         require_once "./view/core/mainModel.php";

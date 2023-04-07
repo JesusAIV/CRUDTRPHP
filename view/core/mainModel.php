@@ -1,5 +1,5 @@
 <?php
-require_once "configGeneral.php";
+require_once "constantes.php";
 class mainModel{
     // Función protegida para la Conexion
     protected function conexion(){
