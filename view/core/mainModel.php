@@ -14,7 +14,7 @@ class mainModel{
         $pass = "W2@2y0:Z";
         $database = "u690797633_tgestiona";
         */
-        
+
         $conexion = mysqli_connect($host,$username,$pass,$database);
 
         // retorna la conexion
