@@ -1,4 +1,4 @@
-<div class="tabla-productos">
+<div class="tabla-productos mt-4">
     <table id="table-productos" class="cell-border" style="width:100%">
         <thead>
             <tr>

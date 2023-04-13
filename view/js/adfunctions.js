@@ -4,6 +4,10 @@ $(document).ready(function () {
 
 function listarproductos() {
     $('#table-productos').DataTable({
+        'dom': 'Bfrtip',
+        'buttons': [
+            'copy', 'excel', 'pdf'
+        ],
         'ajax': {
             'url': "./view/ajax/productos.php",
             'dataSrc': '',
