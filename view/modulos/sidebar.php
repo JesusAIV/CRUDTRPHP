@@ -14,7 +14,7 @@
                 <span class="nav_logo-name">Logo</span>
             </a>
             <div class="nav_list">
-                <a href="<?php echo SERVERURL; ?>informes" class="nav_link active">
+                <a href="<?php echo SERVERURL; ?>inicio" class="nav_link <?php if($viewurl == "inicio"){echo "active"; }; ?>">
                     <i class="fa-regular fa-file-chart-pie"></i>
                     <span>Informes</span>
                 </a>
@@ -26,7 +26,7 @@
                     <i class="fa-regular fa-cart-shopping"></i>
                     <span>Ventas</span>
                 </a>
-                <a href="<?php echo SERVERURL; ?>almacen" class="nav_link">
+                <a href="<?php echo SERVERURL; ?>almacen" class="nav_link <?php if($viewurl == "almacen"){echo "active"; }; ?>">
                     <i class="fa-regular fa-shop"></i>
                     <span>Almacen</span>
                 </a>

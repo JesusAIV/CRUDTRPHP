@@ -10,5 +10,23 @@
     }
 
     class gestionModel extends Main{
-        
+        protected function imagenProducto($ruta){
+            $directorio = SERVERURL.'view/'.$ruta;
+
+            return $directorio;
+        }
+
+        protected function stockProducto($stock){
+            if($stock > 0){
+                $estadoproduc = '<button class="btn btn-success">
+                                    En stock
+                                </button>';
+            }else{
+                $estadoproduc = '<button class="btn btn-danger">
+                                    Agotado
+                                </button>';
+            }
+
+            return $estadoproduc;
+        }
     }
