@@ -30,7 +30,7 @@
 
 <body id="body-pd">
     <?php
-        /* Prueba */
+        /* Prueba 01 */
         $ajax = false;
         require_once "./controller/viewcontroller.php";
         $view = new viewcontroller();
