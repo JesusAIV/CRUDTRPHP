@@ -18,11 +18,11 @@
                     <i class="fa-regular fa-file-chart-pie"></i>
                     <span>Informes</span>
                 </a>
-                <a href="<?php echo SERVERURL; ?>compras" class="nav_link">
+                <a href="<?php echo SERVERURL; ?>compras" class="nav_link <?php if($viewurl == "compras"){echo "active"; }; ?>">
                     <i class="fa-regular fa-bag-shopping"></i>
                     <span>Compras</span>
                 </a>
-                <a href="<?php echo SERVERURL; ?>ventas" class="nav_link">
+                <a href="<?php echo SERVERURL; ?>ventas" class="nav_link <?php if($viewurl == "ventas"){echo "active"; }; ?>">
                     <i class="fa-regular fa-cart-shopping"></i>
                     <span>Ventas</span>
                 </a>

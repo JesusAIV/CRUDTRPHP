@@ -5,11 +5,10 @@ $(document).ready(function () {
 function listarproductos() {
     $('#table-productos').DataTable({
         'dom': 'Bfrtip',
-        'buttons': [
-            'copy', 'excel', 'pdf'
-        ],
+        'searching': false,
+        'ordering': false,
         'ajax': {
-            'url': "./view/ajax/productos.php",
+            'url': './view/ajax/productos.php',
             'dataSrc': '',
             'data': { action: 'listarproductos' },
             'method': 'POST'
@@ -24,7 +23,7 @@ function listarproductos() {
             { 'data': 'estado' }
         ],
         'language': {
-            "url": "./view/js/datatable-es.json"
+            'url': './view/js/datatable-es.json'
         },
         responsive: true
     });
