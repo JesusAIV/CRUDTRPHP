@@ -40,4 +40,25 @@ class gestionController extends gestionModel{
 
         return $data;
     }
+
+    public function Listarcategorias(){
+        $conexion = Conexion::conectar();
+
+        $sql = "SELECT * FROM categoria";
+        $datos = $conexion->query($sql);
+        $datos = $datos->fetch_all(MYSQLI_ASSOC);
+        $mData = array();
+
+        foreach ($datos as $row) {
+            $data = [
+                "idcategoria" => $row['idcategoria'],
+                "nombre" => $row['nombre']
+            ];
+            $mData[]=$data;
+        }
+
+        $data = json_encode($mData, JSON_UNESCAPED_UNICODE);
+
+        return $data;
+    }
 }

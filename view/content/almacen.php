@@ -1,4 +1,6 @@
-<div class="btn btn-primary">Agregar</div>
+<button type="button" class="btn btn-primary" id="open-modal-button">
+    Agregar
+</button>
 <div class="tabla-productos mt-4">
     <table id="table-productos" class="cell-border display" style="width:100%">
         <thead>

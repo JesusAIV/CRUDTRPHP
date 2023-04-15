@@ -17,7 +17,7 @@
     <title>TGestiona</title>
     <script src="<?php echo SERVERURL ?>view/js/jquery.js"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="<?php echo SERVERURL ?>view/css/style.css" />
     <link rel="stylesheet" href="<?php echo SERVERURL ?>view/css/dataTable.css" />
@@ -27,6 +27,8 @@
     <script async defer src="<?php echo SERVERURL;?>view/js/dataTable.js"></script>
     <script async defer src="<?php echo SERVERURL;?>view/js/adfunctions.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 </head>
 
 <body id="body-pd">

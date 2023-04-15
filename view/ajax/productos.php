@@ -6,5 +6,9 @@
     $opciones = new gestionController();
 
     if ($_POST['action'] == 'listarproductos') {
-        echo $opciones->listarproductos();
+        echo $opciones->Listarproductos();
+    }
+
+    if ($_POST['action'] == 'datosSelect') {
+        echo $opciones->Listarcategorias();
     }
