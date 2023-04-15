@@ -12,3 +12,7 @@
     if ($_POST['action'] == 'datosSelect') {
         echo $opciones->Listarcategorias();
     }
+
+    if ($_POST['action'] == 'modalUpdate') {
+        echo $opciones->ProductoID($_POST['idupp']);
+    }

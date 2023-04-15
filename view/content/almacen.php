@@ -1,8 +1,8 @@
-<button type="button" class="btn btn-primary" id="open-modal-button">
-    Agregar
-</button>
+<button type="button" class="btn btn-primary" id="open-modal-button">Agregar</button>
+<button type="button" class="btn btn-secondary" id="open-modal-editar">Editar</button>
+<button type="button" class="btn btn-danger" id="open-modal-eliminar">Eliminar</button>
 <div class="tabla-productos mt-4">
-    <table id="table-productos" class="cell-border display" style="width:100%">
+    <table id="table-productos" class="cell-border display table-productos" style="width:100%">
         <thead>
             <tr>
                 <th class="text-center">#</th>

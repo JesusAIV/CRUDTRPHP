@@ -61,4 +61,26 @@ class gestionController extends gestionModel{
 
         return $data;
     }
+
+    public function ProductoID($id){
+        $conexion = Conexion::conectar();
+
+        $sql = "SELECT * FROM producto WHERE idproducto = $id";
+        $datos = $conexion->query($sql);
+        $datos = $datos->fetch_all(MYSQLI_ASSOC);
+        $mData = array();
+
+        foreach ($datos as $row) {
+            $data = [
+                "idproducto" => $row['idproducto'],
+                "nombre" => $row['nombre'],
+                "descripcion" => $row['descripcion']
+            ];
+            $mData[]=$data;
+        }
+
+        $data = json_encode($mData, JSON_UNESCAPED_UNICODE);
+
+        return $data;
+    }
 }
