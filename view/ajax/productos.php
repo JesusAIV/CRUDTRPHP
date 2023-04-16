@@ -14,5 +14,6 @@
     }
 
     if ($_POST['action'] == 'modalUpdate') {
-        echo $opciones->ProductoID($_POST['idupp']);
+        $id = $_POST['id'];
+        echo $opciones->ProductoID($id);
     }

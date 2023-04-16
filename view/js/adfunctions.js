@@ -1,16 +1,24 @@
 (function () {
 
+    let crud;
+
     $(document).ready(function () {
         listarproductos();
 
         $("#open-modal-button").click(function () {
-            showModalAdd();
+            crud = "agregar";
+            showModalAdd(crud);
+        });
+
+        $('#open-modal-editar').click(function () {
+            var filaSeleccionada = obtenerFilaSeleccionada();
+            obtenerDatosProducto(filaSeleccionada);
         });
 
     });
 
     function listarproductos() {
-        tableproductos = $('#table-productos').DataTable({
+        var tabla = $('#table-productos').DataTable({
             'select': {
                 'style': 'single'
             },
@@ -37,9 +45,54 @@
             },
             'responsive': true
         });
+
+        tabla.on('select', function (e, dt, type, indexes) {
+            if (type === 'row') {
+                filaSeleccionada = tabla.rows(indexes).data()[0].idproducto;
+            }
+        });
     }
 
-    function showModalAdd() {
+    function obtenerFilaSeleccionada() {
+        return filaSeleccionada;
+    }
+
+    function obtenerDatosProducto(idProducto) {
+        $.ajax({
+            url: './view/ajax/productos.php',
+            method: 'POST',
+            data: { id: idProducto, action: 'modalUpdate' },
+            success: function (response) {
+                var datosProducto = JSON.parse(response);
+
+                mostrarModalEditar(datosProducto);
+            }
+        });
+    }
+
+    function mostrarModalEditar(datosProducto) {
+        var modal = document.createElement('div');
+
+        // Crea los elementos de input para mostrar los datos
+        var inputNombre = document.createElement('input');
+        inputNombre.type = 'text';
+        inputNombre.value = datosProducto.nombre;
+
+        var inputDescripcion = document.createElement('input');
+        inputDescripcion.type = 'text';
+        inputDescripcion.value = datosProducto.descripcion;
+
+        // Agrega los elementos de input al modal
+        modal.appendChild(inputNombre);
+        modal.appendChild(inputDescripcion);
+
+        console.log(datosProducto[0].nombre)
+
+        // Abre el modal
+        // ...
+    }
+
+    function showModalAdd(accion) {
         let modal = document.createElement('div');
         modal.classList.add('modal', 'fade');
         modal.id = 'staticBackdrop';
@@ -61,7 +114,12 @@
         let modalTitle = document.createElement('h1');
         modalTitle.classList.add('modal-title', 'fs-5');
         modalTitle.id = 'staticBackdropLabel';
-        modalTitle.textContent = 'Agregar Producto';
+
+        if (accion == 'agregar') {
+            modalTitle.textContent = 'Agregar Producto';
+        } else if (accion == 'editar') {
+            modalTitle.textContent = 'Actualizar Producto';
+        }
 
         let closeButton = document.createElement('button');
         closeButton.type = 'button';
