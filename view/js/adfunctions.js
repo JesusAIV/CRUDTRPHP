@@ -1,4 +1,5 @@
 (function () {
+
     $(document).ready(function () {
         listarproductos();
 
@@ -9,7 +10,7 @@
     });
 
     function listarproductos() {
-        var tableproductos = $('#table-productos').DataTable({
+        tableproductos = $('#table-productos').DataTable({
             'select': {
                 'style': 'single'
             },
@@ -35,17 +36,6 @@
                 'url': './view/js/datatable-es.json'
             },
             'responsive': true
-        });
-
-        // Agrega un evento al botón para abrir el modal
-        $('#open-modal-editar').on('click', function () {
-            // Obtiene los datos de la fila seleccionada
-            var rowData = tableproductos.rows({ selected: true }).data()[0];
-            // Obtiene el ID de la fila seleccionada
-            var rowId = rowData['idproducto'];
-
-            // Abre el modal con el ID de la fila seleccionada
-            showModalUpdate(rowId);
         });
     }
 
@@ -269,22 +259,6 @@
         form.setAttribute('method', 'POST');
         form.setAttribute('action', '/url-de-destino');
 
-        $.ajax({
-            url: './view/ajax/productos.php',
-            type: 'POST',
-            dataType: 'json',
-            data: { idupp: rowId, action: 'modalUpdate' },
-            success: function (response) {
-                // Crea un elemento HTML para el modal
-                var modal = document.createElement('div');
-                console.log(response);
-                document.body.appendChild(modal);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error al obtener los datos del servidor:', textStatus, errorThrown);
-            }
-        });
-
         // Categoria
 
         let categoria_mb3 = document.createElement('div');
@@ -432,24 +406,6 @@
             myModal.hide();
             document.body.removeChild(modal);
         }
-    }
-
-    function openModal(rowId) {
-        // Hace una solicitud AJAX para obtener los datos del servidor
-        $.ajax({
-            url: './view/ajax/productos.php',
-            type: 'POST',
-            data: { idupp: rowId, action: 'modalUpdate' },
-            success: function (response) {
-                // Crea un elemento HTML para el modal
-                var modal = document.createElement('div');
-                modal.innerHTML = response;
-                document.body.appendChild(modal);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error al obtener los datos del servidor:', textStatus, errorThrown);
-            }
-        });
     }
 
 })();

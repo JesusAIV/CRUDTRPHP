@@ -1,3 +1,9 @@
+<?php
+    $pagina = explode("/", $_GET['views']);
+
+    $viewurl = $pagina[0];
+?>
+
 <button type="button" class="btn btn-primary" id="open-modal-button">Agregar</button>
 <button type="button" class="btn btn-secondary" id="open-modal-editar">Editar</button>
 <button type="button" class="btn btn-danger" id="open-modal-eliminar">Eliminar</button>

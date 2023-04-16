@@ -1,10 +1,6 @@
 <?php
     require_once "core/constantes.php";
     session_start();
-
-    $pagina = explode("/", $_GET['views']);
-
-    $viewurl = $pagina[0];
 ?>
 
 <!DOCTYPE html>
