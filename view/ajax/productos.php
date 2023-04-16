@@ -17,3 +17,8 @@
         $id = $_POST['id'];
         echo $opciones->ProductoID($id);
     }
+
+    if ($_POST['action'] == 'categoriaSelect') {
+        $id = $_POST['idcat'];
+        echo $opciones->CategoriaID($id);
+    }

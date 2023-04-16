@@ -11,6 +11,7 @@ if ($ajax){
 }
 
 class gestionController extends gestionModel{
+
     public function ListarProductos(){
         $conexion = Conexion::conectar();
 
@@ -73,4 +74,17 @@ class gestionController extends gestionModel{
 
         return $data;
     }
+
+    public function CategoriaID($id){
+        $conexion = Conexion::conectar();
+
+        $sql = "SELECT * FROM categoria WHERE idcategoria = $id";
+        $datos = $conexion->query($sql);
+        $datos = $datos->fetch_all(MYSQLI_ASSOC);
+
+        $data = json_encode($datos, JSON_UNESCAPED_UNICODE);
+
+        return $data;
+    }
+
 }
