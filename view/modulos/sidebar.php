@@ -1,3 +1,8 @@
+<?php
+    $pagina = explode("/", $_GET['views']);
+
+    $viewurl = $pagina[0];
+?>
 <header class="header" id="header">
     <div class="header_toggle">
         <i class="fa-solid fa-bars" id="header-toggle"></i>
