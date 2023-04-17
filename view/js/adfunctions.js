@@ -77,9 +77,9 @@
         }).done(function (response) {
             datosProducto = JSON.parse(response);
 
-            if (accion == 'editar'){
+            if (accion == 'editar') {
                 showModalAdd(crud)
-            } else{
+            } else {
                 showModalEliminar();
             }
         });
@@ -296,8 +296,10 @@
         form.appendChild(descripcion_mb3);
         descripcion_mb3.appendChild(label_descripcion);
         descripcion_mb3.appendChild(input_descripcion);
-        form.appendChild(content_img);
-        content_img.appendChild(imagen);
+        if (accion == 'editar') {
+            form.appendChild(content_img);
+            content_img.appendChild(imagen)
+        };
         form.appendChild(imagen_mb3);
         imagen_mb3.appendChild(label_imagen);
         imagen_mb3.appendChild(input_imagen);
