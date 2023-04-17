@@ -1,4 +1,4 @@
-
+(function () {
 
     let crud;
     let datosProducto;
@@ -234,7 +234,7 @@
         // Imagen
 
         let rutaImagen = datosProducto[0].imagen;
-        let urlPhp = "http://localhost:8085/CRUDTRPHP/view/";
+        let urlPhp = "https://tgestiona.friendsdevaj.com/view/";
 
         let content_img = document.createElement("div");
         content_img.classList.add('mb-3', 'd-flex', 'justify-content-center');
@@ -430,3 +430,4 @@
     }
 
 
+})();
