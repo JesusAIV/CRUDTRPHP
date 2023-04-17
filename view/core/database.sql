@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2023 a las 16:51:30
+-- Tiempo de generación: 17-04-2023 a las 05:38:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,6 +30,8 @@ CREATE PROCEDURE `ListarProductos` ()   SELECT
 	tbc.nombre as 'nombrecat', 
     tbp.nombre,
     tbp.descripcion,
+    tbp.precio,
+    tbp.stock,
     tbp.imagen,
     tbp.estado
 FROM producto AS tbp 
@@ -98,6 +100,8 @@ CREATE TABLE `producto` (
   `idcategoria` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` text NOT NULL,
+  `precio` double(15,2) NOT NULL,
+  `stock` int(11) NOT NULL,
   `imagen` varchar(255) NOT NULL,
   `estado` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -106,10 +110,10 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idproducto`, `idcategoria`, `nombre`, `descripcion`, `imagen`, `estado`) VALUES
-(1, 1, 'Reloj Invicta 35740 Negro Hombres', 'Reloj invicta modelo 35740 color negro para hombres de silicona, resistencia al agua hasta 100', 'img/categoria/Relojes/1.webp', '1'),
-(2, 2, 'Audífono BLACKLINE HP-2035 Verde', 'Blackline es una marca que tiene como propósito mejorar y simplificar la vida de los usuarios. La marca tiene dentro de su catálogo de productos una variedad de artefactos electrónicos para el hogar, desde televisores hasta pequeños electrodomésticos.', 'img/categoria/Audifonos/2.webp', '1'),
-(3, 3, 'Teclado Mecánico Gamer T-Dagger Arena Rainbow White', 'Teclado T-Dagger ARENA Rainbow\r\n\r\nEspecificaciones técnicas:\r\n-Tipo de teclado: mecánico.\r\n-Bloqueo de tecla Windows: YES.\r\n-Tamaño de teclado: compacto 60%.\r\n-Retroiluminado: YES, Rainbow.', 'img/categoria/Teclados/3.webp', '0');
+INSERT INTO `producto` (`idproducto`, `idcategoria`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `estado`) VALUES
+(1, 1, 'Reloj Invicta 35740 Negro Hombres', 'Reloj invicta modelo 35740 color negro para hombres de silicona, resistencia al agua hasta 100', 349.00, 20, 'img/categoria/Relojes/1.webp', '1'),
+(2, 2, 'Audífono BLACKLINE HP-2035 Verde', 'Blackline es una marca que tiene como propósito mejorar y simplificar la vida de los usuarios. La marca tiene dentro de su catálogo de productos una variedad de artefactos electrónicos para el hogar, desde televisores hasta pequeños electrodomésticos.', 29.90, 20, 'img/categoria/Audifonos/2.webp', '1'),
+(3, 3, 'Teclado Mecánico Gamer T-Dagger Arena Rainbow White', 'Teclado T-Dagger ARENA Rainbow\r\n\r\nEspecificaciones técnicas:\r\n-Tipo de teclado: mecánico.\r\n-Bloqueo de tecla Windows: YES.\r\n-Tamaño de teclado: compacto 60%.\r\n-Retroiluminado: YES, Rainbow.', 114.90, 1, 'img/categoria/Teclados/3.webp', '0');
 
 -- --------------------------------------------------------
 

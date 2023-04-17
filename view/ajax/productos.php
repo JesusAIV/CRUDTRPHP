@@ -22,3 +22,11 @@
         $id = $_POST['idcat'];
         echo $opciones->CategoriaID($id);
     }
+
+    if (isset($_POST['addpname'])) {
+        echo $opciones->agregarProductoC();
+    }
+
+    // if (isset($_POST['uppid'])) {
+    //     echo $opciones->actualizarProductoC();
+    // }

@@ -112,7 +112,7 @@ class mainModel{
                         confirmButtonText: 'Aceptar'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.reload();
+                            $('#table-productos').DataTable().ajax.reload();
                         }
                     })
                 </script>

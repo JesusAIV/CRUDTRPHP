@@ -1,18 +1,20 @@
 <?php
 
-if ($ajax){
+if ($ajax) {
     require_once "../../models/main.php";
     require_once "../../models/gestionModel.php";
     require_once "../../view/core/conexion.php";
-}else{
+} else {
     require_once "./models/main.php";
     require_once "./models/gestionModel.php";
     require_once "./view/core/conexion.php";
 }
 
-class gestionController extends gestionModel{
+class gestionController extends gestionModel
+{
 
-    public function ListarProductos(){
+    public function ListarProductos()
+    {
         $conexion = Conexion::conectar();
 
         $sql = "CALL ListarProductos()";
@@ -22,7 +24,7 @@ class gestionController extends gestionModel{
 
         $contador = 1;
         foreach ($datos as $row) {
-            $estadoproduc = gestionModel::stockProducto($row['estado']);
+            $estadoproduc = gestionModel::stockProducto($row['stock']);
             $directorio = gestionModel::imagenProducto($row['imagen']);
             $data = [
                 "contador" => $contador,
@@ -30,10 +32,12 @@ class gestionController extends gestionModel{
                 "categoria" => $row['nombrecat'],
                 "nombre" => $row['nombre'],
                 "descripcion" => $row['descripcion'],
-                "imagen" => '<img class="image-table-product" width="70" src="'.$directorio.'">',
+                "precio" => $row['precio'],
+                "stock" => $row['stock'],
+                "imagen" => '<img class="image-table-product" width="70" src="' . $directorio . '">',
                 "estado" => $estadoproduc
             ];
-            $mData[]=$data;
+            $mData[] = $data;
             $contador++;
         }
 
@@ -42,7 +46,8 @@ class gestionController extends gestionModel{
         return $data;
     }
 
-    public function Listarcategorias(){
+    public function Listarcategorias()
+    {
         $conexion = Conexion::conectar();
 
         $sql = "SELECT * FROM categoria";
@@ -55,7 +60,7 @@ class gestionController extends gestionModel{
                 "idcategoria" => $row['idcategoria'],
                 "nombre" => $row['nombre']
             ];
-            $mData[]=$data;
+            $mData[] = $data;
         }
 
         $data = json_encode($mData, JSON_UNESCAPED_UNICODE);
@@ -63,7 +68,8 @@ class gestionController extends gestionModel{
         return $data;
     }
 
-    public function ProductoID($id){
+    public function ProductoID($id)
+    {
         $conexion = Conexion::conectar();
 
         $sql = "SELECT * FROM producto WHERE idproducto = $id";
@@ -75,7 +81,8 @@ class gestionController extends gestionModel{
         return $data;
     }
 
-    public function CategoriaID($id){
+    public function CategoriaID($id)
+    {
         $conexion = Conexion::conectar();
 
         $sql = "SELECT * FROM categoria WHERE idcategoria = $id";
@@ -87,4 +94,81 @@ class gestionController extends gestionModel{
         return $data;
     }
 
+    public function agregarProductoC()
+    {
+        $categoria = $_POST['categoria'];
+        $addpname = $_POST['addpname'];
+        $descripcion = $_POST['descripcion'];
+        $precio = $_POST['precio'];
+        $stock = $_POST['stock'];
+
+        $conexion = Conexion::conectar();
+
+        $sqlcat = "SELECT * FROM categoria WHERE idcategoria = '$categoria'";
+        $consultacat = $conexion->query($sqlcat);
+        $consultacat = $consultacat->fetch_all(MYSQLI_ASSOC);
+
+        foreach ($consultacat as $key) {
+        }
+
+        $dir = "../img/productos/" . $key['nombre'] . "/";
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $tipo = $_FILES['imagen']['type'];
+        $tipo = strtolower($tipo);
+        $extension = substr($tipo, strpos($tipo, '/') + 1);
+        $name = $nombreArchivo . '-' . time() . '.' . $extension;
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        move_uploaded_file($_FILES['imagen']['tmp_name'], $dir . $name);
+
+        $directorio = $dir . $name;
+
+        $imagen = substr($directorio, 3);
+
+
+        if (empty($categoria) || empty($addpname) || empty($descripcion) || empty($precio) || empty($stock)) {
+            // Dará una alerta de error
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrio un error inesperado",
+                "Texto" => "Debe completar todos los campos",
+                "Tipo" => "error"
+            ];
+        } else {
+            // Almacena los datos en un array
+            $datosP = [
+                "categoria" => $categoria,
+                "addpname" => $addpname,
+                "descripcion" => $descripcion,
+                "precio" => $precio,
+                "stock" => $stock,
+                "imagen" => $imagen
+            ];
+
+            // Ejecuta la función agregarPersonal obteniendo el array de datos
+            $addProducto = gestionModel::agregarProducto($datosP);
+
+            if ($addProducto >= 1) { /* Si la consulta se ejecuta correctamente */
+                // Dará una alerta de éxito
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Producto registrado",
+                    "Texto" => "El producto se registró correctamente en el sistema",
+                    "Tipo" => "success"
+                ];
+            } else {
+                // Dará una alerta de error
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrio un error inesperado",
+                    "Texto" => "No hemos podido agregar el producto",
+                    "Tipo" => "error"
+                ];
+            }
+        }
+        return mainModel::sweet_alert($alerta);
+    }
 }

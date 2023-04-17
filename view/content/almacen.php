@@ -7,15 +7,19 @@
             <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Codigo</th>
-                <th class="text-center">categoria</th>
+                <th class="text-center">Categoria</th>
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Descripcion</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Stock</th>
                 <th class="text-center">Imagen</th>
                 <th class="text-center">Estado</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
