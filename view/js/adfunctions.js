@@ -31,9 +31,16 @@
 
     function listarproductos() {
         var tabla = $('#table-productos').DataTable({
+            'columnDefs': [ {
+                'orderable': false,
+                'className': 'select-checkbox',
+                'targets':   0
+            } ],
             'select': {
-                'style': 'single'
+                'style':    'single',
+                'selector': 'td:first-child'
             },
+            'order': [[ 1, 'asc' ]],
             'dom': 'Bfrtip',
             'searching': false,
             'ordering': false,
