@@ -1,4 +1,4 @@
-(function () {
+
 
     let crud;
     let datosProducto;
@@ -430,4 +430,3 @@
     }
 
 
-})();
