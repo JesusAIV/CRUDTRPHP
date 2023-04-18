@@ -317,7 +317,7 @@
         if (accion == 'editar') {
             rutaImagen = datosProducto[0].imagen;
 
-            urlPhp = "https://tgestiona.friendsdevaj.com/view/";
+            urlPhp = "view/";
 
             content_img = document.createElement("div");
             content_img.classList.add('mb-3', 'd-flex', 'justify-content-center');
