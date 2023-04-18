@@ -136,7 +136,7 @@
 
         let form = document.createElement('form');
         form.setAttribute('method', 'POST');
-        form.setAttribute('action', 'https://tgestiona.friendsdevaj.com/view/ajax/crudproducto.php');
+        form.setAttribute('action', './view/ajax/crudproducto.php');
         form.classList.add('ProductosAjax');
 
         if (accion == 'agregar') {
