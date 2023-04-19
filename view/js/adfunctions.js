@@ -516,11 +516,8 @@
         myModal.show();
 
         function eliminarProducto() {
-            // Evitar comportamiento predeterminado del evento submit
             event.preventDefault();
-
             const idd = document.getElementById('idd').value;
-
             fetch('./view/ajax/crudproducto.php', {
                 method: 'POST',
                 body: new URLSearchParams({
