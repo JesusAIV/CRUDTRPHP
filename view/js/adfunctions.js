@@ -454,14 +454,18 @@
 
         let form = document.createElement('form');
         form.setAttribute('method', 'POST');
-        form.setAttribute('action', '/url-de-destino');
 
         // ID
 
         let id_input = document.createElement('input');
         id_input.classList.add('form-control');
         id_input.setAttribute('type', 'hidden');
+        id_input.setAttribute('name', 'idd');
+        id_input.id = "idd";
         id_input.value = datosProducto[0].idproducto;
+
+        let alerta = document.createElement('div');
+        alerta.id = "alerta";
 
         // Fin ID
 
@@ -484,9 +488,9 @@
         closeBtn.addEventListener('click', closeModalAdd);
 
         let confirmBtn = document.createElement('button');
-        confirmBtn.type = 'button';
         confirmBtn.classList.add('btn', 'btn-danger');
         confirmBtn.textContent = 'Eliminar';
+        confirmBtn.id = "btn-delete";
 
         modalHeader.appendChild(modalTitle);
         modalHeader.appendChild(closeButton);
@@ -499,7 +503,8 @@
         modalBody.appendChild(form);
         form.appendChild(id_input);
         form.appendChild(confirmacion_mb3);
-        modalContent.appendChild(modalFooter);
+        form.appendChild(modalFooter);
+        form.appendChild(alerta);
 
         modalDialog.appendChild(modalContent);
         modal.appendChild(modalDialog);
@@ -509,6 +514,41 @@
         // Activa el modal
         let myModal = new bootstrap.Modal(modal);
         myModal.show();
+
+        function eliminarProducto() {
+            // Evitar comportamiento predeterminado del evento submit
+            event.preventDefault();
+
+            const idd = document.getElementById('idd').value;
+
+            fetch('./view/ajax/crudproducto.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    action: 'delete',
+                    idd: idd
+                })
+            })
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('alerta').innerHTML = data;
+                    cerrarModal();
+                    recargarTabla();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function cerrarModal() {
+            myModal.hide();
+            document.body.removeChild(modal);
+        }
+
+        function recargarTabla() {
+            $('#table-productos').DataTable().ajax.reload();
+        }
+
+        $("#btn-delete").click(function () {
+            eliminarProducto();
+        });
 
         function closeModalAdd() {
             myModal.hide();
