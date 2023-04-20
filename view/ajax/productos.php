@@ -5,7 +5,7 @@
     require_once "../../controller/gestionController.php";
     $opciones = new gestionController();
 
-    if ($_POST['action'] == 'listarproductos') {
+    if ($_POST['action'] == 'listarproductos' || $_POST['action'] == 'listarproductosdisponibles') {
         echo $opciones->Listarproductos();
     }
 

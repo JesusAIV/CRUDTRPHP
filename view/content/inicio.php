@@ -2,8 +2,12 @@
     $ajax = false;
     require_once "./controller/gestionController.php";
     $gestion = new gestionController();
-    $tabla = 'producto'; // nombre de la tabla a contar
-    $cantidad = $gestion->cantidadRegistros($tabla);
+    $tabla = 'producto';
+    $cantidadProductos = $gestion->cantidadRegistros($tabla);
+    $tabla = 'ventas';
+    $cantidadVentas = $gestion->cantidadRegistros($tabla);
+    $tabla = 'compras';
+    $cantidadCompras = $gestion->cantidadRegistros($tabla);
 ?>
 <a href="<?php echo SERVERURL; ?>compras" class="btn btn-primary py-3">
     <div class="d-flex align-items-center gap-5">
@@ -12,7 +16,7 @@
             <i class="fa-regular fa-bag-shopping"></i>
         </div>
         <div>
-            <p class="m-0">20</p>
+            <p class="m-0"><?php echo $cantidadCompras['cantidad']; ?></p>
         </div>
     </div>
 </a>
@@ -24,7 +28,7 @@
             <i class="fa-regular fa-cart-shopping"></i>
         </div>
         <div>
-            <p class="m-0">20</p>
+            <p class="m-0"><?php echo $cantidadVentas['cantidad']; ?></p>
         </div>
     </div>
 </a>
@@ -36,7 +40,7 @@
         <i class="fa-regular fa-shop"></i>
     </div>
     <div>
-        <p class="m-0"><?php echo $cantidad['cantidad']; ?></p>
+        <p class="m-0"><?php echo $cantidadProductos['cantidad']; ?></p>
     </div>
 
 </div>

@@ -1,13 +1,31 @@
 (function () {
     var tablaProductos;
+    let modal;
+    let myModal;
 
     $(document).ready(function () {
+        productosTableSeleccionados();
         $("#productosModal").click(function () {
             modalProductos();
         });
     });
 
-    function listadoProdductosModal(){
+    function productosTableSeleccionados() {
+        $('#productosSeleccionados').DataTable({
+            "searching": false,
+            "ordering": false,
+            "info": false,
+            'deferRender': true,
+            'scrollY': 300,
+            'scrollCollapse': true,
+            'scroller': true,
+            'language': {
+                'url': './view/js/datatable-es.json'
+            },
+            'responsive': true
+        });
+    }
+    function listadoProdductosModal() {
         // Inicialización de la tabla con la extensión select
         tablaProductos = $('#tablaProductos').DataTable({
             'columnDefs': [{
@@ -19,14 +37,10 @@
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, 'All'],
             ],
-            'order': [[1, 'asc']],
-            'dom': 'Bfrtip',
-            'searching': true,
-            'ordering': false,
             'ajax': {
                 'url': './view/ajax/productos.php',
                 'dataSrc': '',
-                'data': { action: 'listarproductos' },
+                'data': { action: 'listarproductosdisponibles' },
                 'method': 'POST'
             },
             'select': {
@@ -48,36 +62,34 @@
         });
 
         // Cargar productos en la tabla con PHP
-        listarProductos();
+        // listarProductos();
 
         // Evento para el botón de agregar productos
         $('#agregarProductosBtn').click(agregarProductosSeleccionados);
-    }
-
-    function listarProductos() {
-        tablaProductos.ajax.reload();
     }
 
     function agregarProductosSeleccionados() {
         // Obtener los productos seleccionados en la tabla
         var productosSeleccionados = tablaProductos.rows('.selected').data().toArray();
 
+        var tablaProductosSeleccionados = $('#productosSeleccionados').DataTable();
+
         for (var i = 0; i < productosSeleccionados.length; i++) {
             var producto = productosSeleccionados[i];
-            console.log(producto);
-            var productoHtml = '<tr id="' + producto.idproducto + '">';
-            productoHtml += '<td>' + producto.nombre + '</td>';
-            productoHtml += '<td>' + producto.precio + '</td>';
-            productoHtml += '<td><input type="number" id="idprod" class="cantidad" value="1" min="1" data-id="' + producto.idproducto + '"></td>';
-            productoHtml += '<td><p class="precio-total" data-precio="' + producto.precio + '" data-id="' + producto.idproducto + '">' + producto.precio + '</p></td>';
-            productoHtml += '<td><button class="eliminarProductoBtn" data-id="' + producto.idproducto + '">Eliminar</button></td>';
-            productoHtml += '</tr>';
-            $('#productosSeleccionados tbody').append(productoHtml);
+            // var precioTotal = producto.precio * producto.cantidad;
+
+            tablaProductosSeleccionados.row.add([
+                producto.nombre,
+                producto.precio,
+                '<input type="number" id="idprod" class="form-control cantidad" value="1" min="1" data-id="' + producto.idproducto + '">',
+                '<p class="precio-total" data-precio="' + producto.precio + '" data-id="' + producto.idproducto + '">' + producto.precio + '</p>',
+                // precioTotal,
+                '<button class="btn btn-danger eliminarProductoBtn" data-id="' + producto.idproducto + '">Eliminar</button>'
+            ]).draw();
         }
 
-
         $('#productosSeleccionados').on('click', '.eliminarProductoBtn', function () {
-            $(this).closest('tr').remove();
+            tablaProductosSeleccionados.row($(this).closest('tr')).remove().draw();
         });
 
         // Agrega un evento 'change' al input number de cada producto seleccionado
@@ -90,8 +102,6 @@
             // Obtiene el precio unitario del producto a través del atributo data
             var precioUnitario = parseFloat($('p[data-id="' + idProducto + '"]').data('precio'));
 
-            
-
             // Calcula el precio total del producto
             var precioTotal = cantidad * precioUnitario;
             console.log(precioUnitario);
@@ -100,15 +110,16 @@
         });
 
         // Cerrar el modal
-        $('#productosModal').modal('hide');
+        myModal.hide();
+        document.body.removeChild(modal);
     }
 
     function elementosSeleccionados() {
 
     }
 
-    function modalProductos(){
-        let modal = document.createElement('div');
+    function modalProductos() {
+        modal = document.createElement('div');
         modal.classList.add('modal', 'fade');
         modal.id = 'productosModal';
         modal.setAttribute('data-bs-backdrop', 'static');
@@ -129,7 +140,7 @@
         modalTitle.classList.add('modal-title', 'fs-5');
         modalTitle.id = 'tituloLabel';
 
-        modalTitle.textContent = 'Eliminar Producto';
+        modalTitle.textContent = 'Productos disponibles';
 
         let closeButton = document.createElement('button');
         closeButton.type = 'button';
@@ -141,8 +152,29 @@
         let modalBody = document.createElement('div');
         modalBody.classList.add('modal-body');
 
-        let form = document.createElement('form');
-        form.setAttribute('method', 'POST');
+        // Table
+        let table = document.createElement('table');
+        table.classList.add('table', 'table-striped');
+        table.id = "tablaProductos";
+
+        // Thead
+        let thead = document.createElement('thead');
+
+        // Tr
+        let tr = document.createElement('tr');
+
+        // Th
+        var encabezados = ['#', 'Codigo', 'Categoria', 'Nombre', 'Precio', 'Stock', 'Imagen'];
+
+        for (var i = 0; i < encabezados.length; i++) {
+            var th = document.createElement('th');
+            th.classList.add('text-center');
+            th.textContent = encabezados[i];
+            tr.appendChild(th);
+        }
+
+        // Tbody
+        let tbody = document.createElement('tbody');
 
         let modalFooter = document.createElement('div');
         modalFooter.classList.add('modal-footer');
@@ -155,9 +187,9 @@
         closeBtn.addEventListener('click', closeModalAdd);
 
         let confirmBtn = document.createElement('button');
-        confirmBtn.classList.add('btn', 'btn-danger');
-        confirmBtn.textContent = 'Eliminar';
-        confirmBtn.id = "btn-delete";
+        confirmBtn.classList.add('btn', 'btn-success');
+        confirmBtn.textContent = 'Agregar elementos';
+        confirmBtn.id = "agregarProductosBtn";
 
         modalHeader.appendChild(modalTitle);
         modalHeader.appendChild(closeButton);
@@ -167,16 +199,21 @@
 
         modalContent.appendChild(modalHeader);
         modalContent.appendChild(modalBody);
-        modalBody.appendChild(form);
-        form.appendChild(modalFooter);
+        modalBody.appendChild(table);
+        table.appendChild(thead);
+        thead.appendChild(tr);
+        table.appendChild(tbody);
+        modalContent.appendChild(modalFooter);
 
         modalDialog.appendChild(modalContent);
         modal.appendChild(modalDialog);
 
         document.body.appendChild(modal);
 
+        listadoProdductosModal()
+
         // Activa el modal
-        let myModal = new bootstrap.Modal(modal);
+        myModal = new bootstrap.Modal(modal);
         myModal.show();
 
         function closeModalAdd() {
@@ -184,4 +221,7 @@
             document.body.removeChild(modal);
         }
     }
+
+    
+
 })();

@@ -17,8 +17,20 @@ class gestionController extends gestionModel
     {
         $conexion = Conexion::conectar();
 
-        $sql = "CALL ListarProductos()";
-        $datos = $conexion->query($sql);
+        $accion = $_POST['action'];
+
+        $sql01 = "CALL ListarProductos()";
+        $sql02 = "CALL ListarProductosDisponibles()";
+        $datos = "";
+
+        switch ($accion){
+            case "listarproductos":
+                $datos = $conexion->query($sql01);
+                break;
+            case "listarproductosdisponibles":
+                $datos = $conexion->query($sql02);
+                break;
+        }
         $datos = $datos->fetch_all(MYSQLI_ASSOC);
         $mData = array();
 
@@ -289,12 +301,22 @@ class gestionController extends gestionModel
     public function cantidadRegistros($tabla)
     {
         $conexion = Conexion::conectar();
-    
+
         $sql = "SELECT COUNT(*) as cantidad FROM $tabla";
         $datos = $conexion->query($sql);
         $datos = $datos->fetch_assoc();
-    
+
         return $datos;
     }
-    
+
+    public function ListarClientes()
+    {
+        $conexion = Conexion::conectar();
+
+        $sql = "CALL ListarClientes()";
+        $datos = $conexion->query($sql);
+        $datos = $datos->fetch_all(MYSQLI_ASSOC);
+
+        return $datos;
+    }
 }
