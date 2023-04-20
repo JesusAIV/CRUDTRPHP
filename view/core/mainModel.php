@@ -3,17 +3,24 @@ require_once "constantes.php";
 class mainModel{
     // Función protegida para la Conexion
     protected function conexion(){
+        /*
         $host = "127.0.0.1";
         $username = "root";
         $pass = "";
         $database = "tgestiona";
-
+        */
         /*
         $host = "localhost";
         $username = "u690797633_tgestiona";
         $pass = "W2@2y0:Z";
         $database = "u690797633_tgestiona";
         */
+
+
+        $host = "sql847.main-hosting.eu";
+        $username = "u690797633_tgestiona";
+        $pass = "W2@2y0:Z";
+        $database = "u690797633_tgestiona";
 
         $conexion = mysqli_connect($host,$username,$pass,$database);
 

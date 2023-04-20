@@ -34,7 +34,7 @@ class gestionController extends gestionModel
                 "descripcion" => $row['descripcion'],
                 "precio" => $row['precio'],
                 "stock" => $row['stock'],
-                "imagen" => '<img class="image-table-product" width="70" src="' . $directorio . '">',
+                "imagen" => '<img class="image-table-product" width="70" height="70" src="' . $directorio . '">',
                 "estado" => $estadoproduc
             ];
             $mData[] = $data;
@@ -197,7 +197,7 @@ class gestionController extends gestionModel
         }
 
         if ($_FILES['imagen']['name']) {
-            $dir = "../img/productos/" . $key['categoria'] . "/";
+            $dir = "../img/productos/" . $key['nombre'] . "/";
             $nombreArchivo = $_FILES['imagen']['name'];
             $tipo = $_FILES['imagen']['type'];
             $tipo = strtolower($tipo);
@@ -285,4 +285,16 @@ class gestionController extends gestionModel
             return "<script>" . mainModel::sweet_alert($alerta) . "</script>";
         }
     }
+
+    public function cantidadRegistros($tabla)
+    {
+        $conexion = Conexion::conectar();
+    
+        $sql = "SELECT COUNT(*) as cantidad FROM $tabla";
+        $datos = $conexion->query($sql);
+        $datos = $datos->fetch_assoc();
+    
+        return $datos;
+    }
+    
 }

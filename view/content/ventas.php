@@ -1,1 +1,1 @@
-<p>ventas</p>
+<a href="<?php echo SERVERURL ?>registrarventa" class="btn btn-primary">Agregar venta</a>

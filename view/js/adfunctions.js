@@ -41,9 +41,13 @@
                 'style': 'single',
                 'selector': 'td:first-child'
             },
+            'lengthMenu': [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, 'All'],
+            ],
             'order': [[1, 'asc']],
             'dom': 'Bfrtip',
-            'searching': false,
+            'searching': true,
             'ordering': false,
             'ajax': {
                 'url': './view/ajax/productos.php',
@@ -629,8 +633,10 @@
                         },
                         success: function (data) {
                             respuesta.html(data);
-                            form[0].reset();
-                            tabla.ajax.reload();
+                            if (tipo === "add-producto") {
+                                form[0].reset();
+                            }
+                            tabla.ajax.reload(null, false);
                         },
                         error: function () {
                             respuesta.html(msjError);
