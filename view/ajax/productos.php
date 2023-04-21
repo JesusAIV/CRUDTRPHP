@@ -42,3 +42,7 @@
     if ($_POST['action'] == 'listarventas') {
         echo $opciones->ListarVentas();
     }
+
+    if ($_POST['action'] == 'guardarcompra') {
+        echo $opciones->GuardarCompra();
+    }

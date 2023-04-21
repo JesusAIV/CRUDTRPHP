@@ -2,16 +2,27 @@
     var tablaProductos;
     let modal;
     let myModal;
+    let accion;
 
     $(document).ready(function () {
         productosTableSeleccionados();
         $("#productosModal").click(function () {
-            modalProductos();
+            accion = "venta";
+            modalProductos(accion);
+        });
+        $("#productosModalcompra").click(function () {
+            accion = "compra";
+            modalProductos(accion);
         });
         $('#save-venta').click(function (e) {
             e.preventDefault(); // Prevenir el comportamiento predeterminado del botón (recargar la página)
 
             guardarVenta();
+        });
+        $('#save-compra').click(function (e) {
+            e.preventDefault(); // Prevenir el comportamiento predeterminado del botón (recargar la página)
+
+            guardarCompra();
         });
         listarVentas();
     });
@@ -32,8 +43,17 @@
         });
     }
 
-    function listadoProdductosModal() {
+    function listadoProdductosModal(mod) {
         // Inicialización de la tabla con la extensión select
+        var listar = mod;
+        var lista;
+
+        if (listar == "venta"){
+            lista = "listarproductosdisponibles";
+        } else if (listar == "compra"){
+            lista = "listarproductos"
+        }
+
         tablaProductos = $('#tablaProductos').DataTable({
             'columnDefs': [{
                 'orderable': false,
@@ -47,7 +67,7 @@
             'ajax': {
                 'url': './view/ajax/productos.php',
                 'dataSrc': '',
-                'data': { action: 'listarproductosdisponibles' },
+                'data': { action: lista },
                 'method': 'POST'
             },
             'select': {
@@ -191,7 +211,8 @@
         return productos;
     }
 
-    function modalProductos() {
+    function modalProductos(acciones) {
+        var acc = acciones;
         modal = document.createElement('div');
         modal.classList.add('modal', 'fade');
         modal.id = 'productosModal';
@@ -283,7 +304,7 @@
 
         document.body.appendChild(modal);
 
-        listadoProdductosModal()
+        listadoProdductosModal(acc);
 
         // Activa el modal
         myModal = new bootstrap.Modal(modal);
@@ -323,6 +344,53 @@
             },
             'responsive': true
         });
+    }
+
+    function guardarCompra() {
+        // Obtener los datos de la venta
+        var proveedor = $('#proveedorSelect').val();
+        var productos = obtenerProductosSeleccionados();
+
+        // Hacer la solicitud AJAX
+        $.ajax({
+            url: './view/ajax/productos.php',
+            type: 'POST',
+            data: { proveedor: proveedor, productos: productos, action: 'guardarcompra' },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    // Mostrar alerta de SweetAlert2
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.message
+                    });
+
+                    // Reiniciar el select y vaciar la tabla de productos seleccionados
+                    reiniciarSelectProveedores();
+                    vaciarTablaProductosSeleccionados();
+                } else {
+                    // Mostrar alerta de SweetAlert2 con error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al guardar la compra',
+                        text: response.message
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                // Mostrar alerta de SweetAlert2 con error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al guardar la compra',
+                    text: error
+                });
+            }
+        });
+    }
+
+    function reiniciarSelectProveedores() {
+        // Reiniciar el select de clientes a la opción por defecto
+        $('#proveedorSelect').val($('#proveedorSelect option:first').val());
     }
 
 })();

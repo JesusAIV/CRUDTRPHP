@@ -10,7 +10,7 @@
             $conexion = mainModel::conexion();
             $usuario = $datos['usuario'];
             $pass = $datos['passw'];
-            $sql = "SELECT * FROM empleado WHERE usuario='$usuario' AND passw='$pass'";
+            $sql = "SELECT * FROM usuario WHERE usuario='$usuario' AND passw='$pass'";
             $consulta = $conexion->query($sql);
 
             return $consulta;

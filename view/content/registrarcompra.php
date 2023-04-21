@@ -2,13 +2,13 @@
     $ajax = false;
     require_once "./controller/gestionController.php";
     $gestion = new gestionController();
-    $productos = $gestion->ListarClientes();
+    $productos = $gestion->ListarProveedores();
 ?>
 <div class="container">
     <div class="container-fluid">
         <div class ="">
             <label for="texto">Proveedor</label>
-            <select class="form-select border-dark-subtle" id="clienteSelect">
+            <select class="form-select border-dark-subtle" id="proveedorSelect">
                 <option select>Seleccione un proveedor</option>
                 <?php foreach($productos as $rowc)
                 { ?>
@@ -33,6 +33,6 @@
 </table>
 
 <div class="container-fluid d-flex aling-items-center justify-content-between mt-4">
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="productosModal">Seleccionar productos</button>
-    <button type="button" class="btn btn-primary" id="save-venta">Guardar compra</button>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="productosModalcompra">Seleccionar productos</button>
+    <button type="button" class="btn btn-primary" id="save-compra">Guardar compra</button>
 </div>

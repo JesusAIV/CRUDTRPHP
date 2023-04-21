@@ -445,4 +445,63 @@ class gestionController extends gestionModel
 
         return $data;
     }
+
+    public function ListarProveedores()
+    {
+        $conexion = Conexion::conectar();
+
+        $sql = "CALL ListarProveedores()";
+        $datos = $conexion->query($sql);
+        $datos = $datos->fetch_all(MYSQLI_ASSOC);
+
+        return $datos;
+    }
+
+    public function GuardarCompra()
+    {
+        $conexion = Conexion::conectar();
+
+        // Obtener los datos de la venta enviados por AJAX
+        $proveedor = $_POST['proveedor'];
+        $productos = $_POST['productos'];
+
+        // Calcular la fecha actual
+        date_default_timezone_set('America/Lima');
+        $fecha = date('Y-m-d');
+
+        // Recorrer los productos y guardarlos en la base de datos
+        foreach ($productos as $producto) {
+            // Obtener el precio unitario del producto desde la base de datos
+            $consulta_precio = "SELECT precio, stock FROM producto WHERE idproducto = " . $producto['id'];
+            $resultado_precio = $conexion->query($consulta_precio);
+            $fila_precio = $resultado_precio->fetch_all(MYSQLI_ASSOC);
+            $precio_unitario = $fila_precio[0]['precio'];
+
+            // Calcular el total de la venta para este producto
+            $cantidad = $producto['cantidad']; // Por ejemplo, suponemos que siempre se vende una unidad de cada producto
+            $total = $cantidad * $precio_unitario;
+
+            // Guardar la venta en la base de datos
+            $consulta_venta = "INSERT INTO compras (id_producto, id_proveedor, cantidad, fecha, precio_unitario, total) VALUES (" . $producto['id'] . ", " . $proveedor . ", " . $cantidad . ", '" . $fecha . "', " . $precio_unitario . ", " . $total . ")";
+            $conexion->query($consulta_venta);
+
+            $stockActual = $fila_precio[0]['stock'];
+
+            // Calcular el nuevo stock del producto
+            $nuevoStock = $stockActual + $cantidad;
+
+            // Actualizar el stock
+            $consulta_venta = "UPDATE producto SET stock = $nuevoStock WHERE idproducto = " . $producto['id'];
+            $conexion->query($consulta_venta);
+        }
+
+        // Devolver una respuesta a AJAX
+        $response = array(
+            'status' => 'success',
+            'message' => 'Compra guardada con éxito'
+        );
+
+        return json_encode($response, JSON_UNESCAPED_UNICODE);
+    }
+
 }
