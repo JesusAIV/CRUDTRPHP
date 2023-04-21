@@ -30,3 +30,7 @@
     if ($_POST['action'] == 'guardarventa') {
         echo $opciones->GuardarVenta();
     }
+
+    if ($_POST['action'] == 'graficoProducto') {
+        echo $opciones->graficoProducto();
+    }

@@ -328,7 +328,7 @@ class gestionController extends gestionModel
         $cliente = $_POST['cliente'];
         $productos = $_POST['productos'];
 
-        if(empty($cliente)){
+        if (empty($cliente)) {
             $response = array(
                 'status' => 'error',
                 'message' => 'Debe de seleccionar a un cliente'
@@ -374,5 +374,25 @@ class gestionController extends gestionModel
         );
 
         return json_encode($response, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function graficoProducto()
+    {
+        $conexion = Conexion::conectar();
+
+        // Consulta para obtener la cantidad de productos por categoría
+        $query = "CALL GraficoProducto()";
+
+        // Ejecutar la consulta y guardar los resultados en un array
+        $resultados = array();
+        if ($resultado = $conexion->query($query)) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $resultados[] = $fila;
+            }
+            $resultado->free();
+        }
+
+        // Devolver los resultados como JSON
+        return json_encode($resultados, JSON_UNESCAPED_UNICODE);
     }
 }
