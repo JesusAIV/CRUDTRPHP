@@ -1,7 +1,7 @@
 <?php
     class viewmodel{
         protected function obtenervistamodelo($views){
-            $lista = ["inicio", "almacen", "compras", "ventas", "registrarventa"];
+            $lista = ["inicio", "almacen", "compras", "ventas", "registrarventa" ,"registrarcompra"];
 
             if(in_array($views,$lista)){
                 if(is_file("./view/content/".$views.".php")){
