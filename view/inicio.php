@@ -59,7 +59,7 @@
         endif;
     ?>
     <script src="<?php echo SERVERURL;?>view/js/adfunctions.min.js"></script>
-    <script src="<?php echo SERVERURL;?>view/js/acciones.min.js"></script>
+    <script src="<?php echo SERVERURL;?>view/js/acciones.js"></script>
     <?php if($viewurl == "inicio"){ ?> <script src="<?php echo SERVERURL;?>view/js/graficos.js"></script> <?php ; } ?>
 </body>
 </html>

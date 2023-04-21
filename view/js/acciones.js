@@ -13,6 +13,7 @@
 
             guardarVenta();
         });
+        listarVentas();
     });
 
     function productosTableSeleccionados() {
@@ -190,7 +191,6 @@
         return productos;
     }
 
-
     function modalProductos() {
         modal = document.createElement('div');
         modal.classList.add('modal', 'fade');
@@ -295,6 +295,34 @@
         }
     }
 
-
+    function listarVentas() {
+        // Inicialización de la tabla con la extensión select
+        $('#tablaVentas').DataTable({
+            'lengthMenu': [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, 'All'],
+            ],
+            'ajax': {
+                'url': './view/ajax/productos.php',
+                'dataSrc': '',
+                'data': { action: 'listarventas' },
+                'method': 'POST'
+            },
+            'dom': 'Bfrtip',
+            'columns': [
+                { 'data': 'contador' },
+                { 'data': 'fecha' },
+                { 'data': 'producto' },
+                { 'data': 'cliente' },
+                { 'data': 'cantidad' },
+                { 'data': 'precio_unitario' },
+                { 'data': 'total' }
+            ],
+            'language': {
+                'url': './view/js/datatable-es.json'
+            },
+            'responsive': true
+        });
+    }
 
 })();

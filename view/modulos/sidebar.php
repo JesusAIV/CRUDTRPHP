@@ -19,19 +19,23 @@
                 <span class="nav_logo-name">Logo</span>
             </a>
             <div class="nav_list">
-                <a href="<?php echo SERVERURL; ?>inicio" class="nav_link <?php if($viewurl == "inicio"){echo "active"; }; ?>">
+                <a href="<?php echo SERVERURL; ?>inicio"
+                    class="nav_link <?php if($viewurl == "inicio"){echo "active"; }; ?>">
                     <i class="fa-regular fa-file-chart-pie"></i>
                     <span>Informes</span>
                 </a>
-                <a href="<?php echo SERVERURL; ?>compras" class="nav_link <?php if($viewurl == "compras"){echo "active"; }; ?>">
-                    <i class="fa-regular fa-bag-shopping"></i>
+                <a href="<?php echo SERVERURL; ?>compras"
+                    class="nav_link <?php if($viewurl == "compras"){echo "active"; }; ?>">
+                    <i class="fa-regular fa-cart-shopping"></i>
                     <span>Compras</span>
                 </a>
-                <a href="<?php echo SERVERURL; ?>ventas" class="nav_link <?php if($viewurl == "ventas"){echo "active"; }; ?>">
-                    <i class="fa-regular fa-cart-shopping"></i>
+                <a href="<?php echo SERVERURL; ?>ventas"
+                    class="nav_link <?php if($viewurl == "ventas"){echo "active"; }; ?>">
+                    <i class="fa-regular fa-bag-shopping"></i>
                     <span>Ventas</span>
                 </a>
-                <a href="<?php echo SERVERURL; ?>almacen" class="nav_link <?php if($viewurl == "almacen"){echo "active"; }; ?>">
+                <a href="<?php echo SERVERURL; ?>almacen"
+                    class="nav_link <?php if($viewurl == "almacen"){echo "active"; }; ?>">
                     <i class="fa-regular fa-shop"></i>
                     <span>Almacen</span>
                 </a>

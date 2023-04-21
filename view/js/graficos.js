@@ -24,16 +24,23 @@
                 // Crear el gráfico de barras
                 var ctx = document.getElementById('graficoProductosPorCategoria').getContext('2d');
                 var grafico = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'polarArea',
                     data: {
                         labels: categorias,
                         datasets: [{
-                            label: 'Cantidad de productos por categoría',
-                            data: cantidades,
-                            backgroundColor: '#428bca'
+                            data: cantidades
                         }]
                     },
                     options: {
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Cantidad de productos por categoría'
+                            }
+                        },
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
@@ -59,7 +66,7 @@
 
     }
 
-        function graficoVenta() {
+    function graficoVenta() {
         // Obtener los datos de la base de datos mediante una solicitud AJAX
         $.ajax({
             url: './view/ajax/productos.php',
@@ -78,16 +85,23 @@
                 // Crear el gráfico de barras
                 var ctx = document.getElementById('graficoVentaPorCategoria').getContext('2d');
                 var grafico = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'polarArea',
                     data: {
                         labels: categorias,
                         datasets: [{
-                            label: 'Cantidad de ventas por categoría',
-                            data: cantidades,
-                            backgroundColor: '#428bca'
+                            data: cantidades
                         }]
                     },
                     options: {
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Cantidad de ventas por categoría'
+                            }
+                        },
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {

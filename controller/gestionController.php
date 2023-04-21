@@ -415,4 +415,34 @@ class gestionController extends gestionModel
         // Devolver los resultados como JSON
         return json_encode($resultados, JSON_UNESCAPED_UNICODE);
     }
+
+    public function ListarVentas(){
+        $conexion = Conexion::conectar();
+
+        $sql = "CALL ListarVentas()";
+
+        $datos = $conexion->query($sql);
+
+        $datos = $datos->fetch_all(MYSQLI_ASSOC);
+        $mData = array();
+
+        $contador = 1;
+        foreach ($datos as $row) {
+            $data = [
+                "contador" => $contador,
+                "fecha" => $row['fecha'],
+                "producto" => $row['producto'],
+                "cliente" => $row['cliente'],
+                "cantidad" => $row['cantidad'],
+                "precio_unitario" => 'S/.'.$row['precio_unitario'],
+                "total" => 'S/.'.$row['total']
+            ];
+            $mData[] = $data;
+            $contador++;
+        }
+
+        $data = json_encode($mData, JSON_UNESCAPED_UNICODE);
+
+        return $data;
+    }
 }
