@@ -1,6 +1,10 @@
 <?php
     require_once "core/constantes.php";
     session_start();
+    
+    $pagina = explode("/", $_GET['views']);
+
+    $viewurl = $pagina[0];
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +28,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="<?php echo SERVERURL;?>view/js/adfunctions.js"></script>
-    <script src="<?php echo SERVERURL;?>view/js/acciones.js"></script>
-    <script src="<?php echo SERVERURL;?>view/js/graficos.js"></script>
+    <script src="<?php echo SERVERURL;?>view/js/adfunctions.min.js"></script>
+    <script src="<?php echo SERVERURL;?>view/js/acciones.min.js"></script>
+    <?php if($viewurl == "inicio"){ ?> <script src="<?php echo SERVERURL;?>view/js/graficos.js"></script> <?php ; } ?>
 </head>
 
 <body id="body-pd">
