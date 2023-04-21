@@ -395,4 +395,24 @@ class gestionController extends gestionModel
         // Devolver los resultados como JSON
         return json_encode($resultados, JSON_UNESCAPED_UNICODE);
     }
+
+    public function graficoVenta()
+    {
+        $conexion = Conexion::conectar();
+
+        // Consulta para obtener la cantidad de productos por categoría
+        $query = "CALL GraficoVenta()";
+
+        // Ejecutar la consulta y guardar los resultados en un array
+        $resultados = array();
+        if ($resultado = $conexion->query($query)) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $resultados[] = $fila;
+            }
+            $resultado->free();
+        }
+
+        // Devolver los resultados como JSON
+        return json_encode($resultados, JSON_UNESCAPED_UNICODE);
+    }
 }

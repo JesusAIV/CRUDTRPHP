@@ -34,3 +34,7 @@
     if ($_POST['action'] == 'graficoProducto') {
         echo $opciones->graficoProducto();
     }
+
+    if ($_POST['action'] == 'graficoVenta') {
+        echo $opciones->graficoVenta();
+    }

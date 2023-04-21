@@ -1,13 +1,13 @@
 <?php
-    $ajax = false;
-    require_once "./controller/gestionController.php";
-    $gestion = new gestionController();
-    $tabla = 'producto';
-    $cantidadProductos = $gestion->cantidadRegistros($tabla);
-    $tabla = 'ventas';
-    $cantidadVentas = $gestion->cantidadRegistros($tabla);
-    $tabla = 'compras';
-    $cantidadCompras = $gestion->cantidadRegistros($tabla);
+$ajax = false;
+require_once "./controller/gestionController.php";
+$gestion = new gestionController();
+$tabla = 'producto';
+$cantidadProductos = $gestion->cantidadRegistros($tabla);
+$tabla = 'ventas';
+$cantidadVentas = $gestion->cantidadRegistros($tabla);
+$tabla = 'compras';
+$cantidadCompras = $gestion->cantidadRegistros($tabla);
 ?>
 <a href="<?php echo SERVERURL; ?>compras" class="btn btn-primary py-3">
     <div class="d-flex align-items-center gap-5">
@@ -45,4 +45,17 @@
     </div>
 </a>
 
-<canvas id="graficoProductosPorCategoria"></canvas>
+<div class="container-fluid mt-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+        <div class="col">
+            <div class="chart-container" style="height: 400px;">
+                <canvas id="graficoProductosPorCategoria"></canvas>
+            </div>
+        </div>
+        <div class="col">
+            <div class="chart-container" style="height: 400px;">
+                <canvas id="graficoVentaPorCategoria"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
