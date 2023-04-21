@@ -25,6 +25,7 @@
             guardarCompra();
         });
         listarVentas();
+        listarCompras();
     });
 
     function productosTableSeleccionados() {
@@ -393,4 +394,33 @@
         $('#proveedorSelect').val($('#proveedorSelect option:first').val());
     }
 
+    function listarCompras() {
+        // Inicialización de la tabla con la extensión select
+        $('#tablaCompras').DataTable({
+            'lengthMenu': [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, 'All'],
+            ],
+            'ajax': {
+                'url': './view/ajax/productos.php',
+                'dataSrc': '',
+                'data': { action: 'listarcompras' },
+                'method': 'POST'
+            },
+            'dom': 'Bfrtip',
+            'columns': [
+                { 'data': 'contador' },
+                { 'data': 'fecha' },
+                { 'data': 'producto' },
+                { 'data': 'proveedor' },
+                { 'data': 'cantidad' },
+                { 'data': 'precio_unitario' },
+                { 'data': 'total' }
+            ],
+            'language': {
+                'url': './view/js/datatable-es.json'
+            },
+            'responsive': true
+        });
+    }
 })();

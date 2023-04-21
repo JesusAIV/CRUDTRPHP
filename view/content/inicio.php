@@ -65,5 +65,10 @@ $cantidadCompras = $gestion->cantidadRegistros($tabla);
                 <canvas id="graficoVentaPorCategoria"></canvas>
             </div>
         </div>
+        <div class="col">
+            <div class="chart-container" style="height: 400px;">
+                <canvas id="graficoCompraPorCategoria"></canvas>
+            </div>
+        </div>
     </div>
 </div>

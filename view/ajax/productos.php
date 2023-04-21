@@ -46,3 +46,10 @@
     if ($_POST['action'] == 'guardarcompra') {
         echo $opciones->GuardarCompra();
     }
+    if ($_POST['action'] == 'listarcompras') { 
+        echo $opciones->ListarCompras();
+    }
+
+    if ($_POST['action'] == 'graficoCompra') {
+        echo $opciones->graficoCompra();
+    }
