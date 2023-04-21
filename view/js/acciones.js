@@ -8,6 +8,11 @@
         $("#productosModal").click(function () {
             modalProductos();
         });
+        $('#save-venta').click(function (e) {
+            e.preventDefault(); // Prevenir el comportamiento predeterminado del botón (recargar la página)
+
+            guardarVenta();
+        });
     });
 
     function productosTableSeleccionados() {
@@ -25,6 +30,7 @@
             'responsive': true
         });
     }
+
     function listadoProdductosModal() {
         // Inicialización de la tabla con la extensión select
         tablaProductos = $('#tablaProductos').DataTable({
@@ -79,9 +85,10 @@
             // var precioTotal = producto.precio * producto.cantidad;
 
             tablaProductosSeleccionados.row.add([
+                producto.idproducto,
                 producto.nombre,
                 producto.precio,
-                '<input type="number" id="idprod" class="form-control cantidad" value="1" min="1" data-id="' + producto.idproducto + '">',
+                '<input type="number" id="' + producto.idproducto + '" class="form-control cantidad" value="1" min="1" data-id="' + producto.idproducto + '">',
                 '<p class="precio-total" data-precio="' + producto.precio + '" data-id="' + producto.idproducto + '">' + producto.precio + '</p>',
                 // precioTotal,
                 '<button class="btn btn-danger eliminarProductoBtn" data-id="' + producto.idproducto + '">Eliminar</button>'
@@ -114,9 +121,75 @@
         document.body.removeChild(modal);
     }
 
-    function elementosSeleccionados() {
+    function guardarVenta() {
+        // Obtener los datos de la venta
+        var cliente = $('#clienteSelect').val();
+        var productos = obtenerProductosSeleccionados();
 
+        // Hacer la solicitud AJAX
+        $.ajax({
+            url: './view/ajax/productos.php',
+            type: 'POST',
+            data: { cliente: cliente, productos: productos, action: 'guardarventa' },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    // Mostrar alerta de SweetAlert2
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.message
+                    });
+
+                    // Reiniciar el select y vaciar la tabla de productos seleccionados
+                    reiniciarSelectClientes();
+                    vaciarTablaProductosSeleccionados();
+                } else {
+                    // Mostrar alerta de SweetAlert2 con error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al guardar la venta',
+                        text: response.message
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                // Mostrar alerta de SweetAlert2 con error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al guardar la venta',
+                    text: error
+                });
+            }
+        });
     }
+
+    function reiniciarSelectClientes() {
+        // Reiniciar el select de clientes a la opción por defecto
+        $('#clienteSelect').val($('#clienteSelect option:first').val());
+    }
+
+    function vaciarTablaProductosSeleccionados() {
+        // Vaciar la tabla de productos seleccionados
+        $('#productosSeleccionados').DataTable().clear().draw();
+    }
+
+    function obtenerProductosSeleccionados() {
+        var productosSeleccionados = $('#productosSeleccionados').DataTable().rows().data().toArray();
+
+        var productos = [];
+
+        for (var i = 0; i < productosSeleccionados.length; i++) {
+            var producto = {
+                id: productosSeleccionados[i][0],
+                cantidad: $('#' + productosSeleccionados[i][0]).val()
+            };
+
+            productos.push(producto);
+        }
+
+        return productos;
+    }
+
 
     function modalProductos() {
         modal = document.createElement('div');
@@ -222,6 +295,6 @@
         }
     }
 
-    
+
 
 })();

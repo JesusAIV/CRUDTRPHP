@@ -27,6 +27,6 @@
         echo $opciones->agregarProductoC();
     }
 
-    // if (isset($_POST['uppid'])) {
-    //     echo $opciones->actualizarProductoC();
-    // }
+    if ($_POST['action'] == 'guardarventa') {
+        echo $opciones->GuardarVenta();
+    }

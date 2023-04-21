@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="">
             <label for="texto">Cliente</label>
-            <select class="form-select border-dark-subtle" aria-label="Default select example">
+            <select class="form-select border-dark-subtle" id="clienteSelect">
                 <option selected>Seleccione un cliente</option>
                 <?php foreach ($productos as $rowc) { ?>
                 <option value="<?php echo $rowc['id']; ?>"><?php echo $rowc['nombre']; ?></option>
@@ -20,6 +20,7 @@
 <table id="productosSeleccionados">
     <thead>
         <tr>
+            <th class="text-center">ID</th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Precio U</th>
             <th class="text-center">Cantidad</th>

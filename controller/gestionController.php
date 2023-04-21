@@ -23,7 +23,7 @@ class gestionController extends gestionModel
         $sql02 = "CALL ListarProductosDisponibles()";
         $datos = "";
 
-        switch ($accion){
+        switch ($accion) {
             case "listarproductos":
                 $datos = $conexion->query($sql01);
                 break;
@@ -318,5 +318,61 @@ class gestionController extends gestionModel
         $datos = $datos->fetch_all(MYSQLI_ASSOC);
 
         return $datos;
+    }
+
+    public function GuardarVenta()
+    {
+        $conexion = Conexion::conectar();
+
+        // Obtener los datos de la venta enviados por AJAX
+        $cliente = $_POST['cliente'];
+        $productos = $_POST['productos'];
+
+        if(empty($cliente)){
+            $response = array(
+                'status' => 'error',
+                'message' => 'Debe de seleccionar a un cliente'
+            );
+
+            return json_encode($response, JSON_UNESCAPED_UNICODE);
+        }
+
+        // Calcular la fecha actual
+        date_default_timezone_set('America/Lima');
+        $fecha = date('Y-m-d');
+
+        // Recorrer los productos y guardarlos en la base de datos
+        foreach ($productos as $producto) {
+            // Obtener el precio unitario del producto desde la base de datos
+            $consulta_precio = "SELECT precio, stock FROM producto WHERE idproducto = " . $producto['id'];
+            $resultado_precio = $conexion->query($consulta_precio);
+            $fila_precio = $resultado_precio->fetch_all(MYSQLI_ASSOC);
+            $precio_unitario = $fila_precio[0]['precio'];
+
+            // Calcular el total de la venta para este producto
+            $cantidad = $producto['cantidad']; // Por ejemplo, suponemos que siempre se vende una unidad de cada producto
+            $total = $cantidad * $precio_unitario;
+
+            // Guardar la venta en la base de datos
+            $consulta_venta = "INSERT INTO ventas (id_producto, id_cliente, cantidad, fecha, precio_unitario, total) VALUES (" . $producto['id'] . ", " . $cliente . ", " . $cantidad . ", '" . $fecha . "', " . $precio_unitario . ", " . $total . ")";
+            $conexion->query($consulta_venta);
+
+            $stockActual = $fila_precio[0]['stock'];
+
+            // Calcular el nuevo stock del producto
+            $nuevoStock = $stockActual - $cantidad;
+
+            // Actualizar el stock
+            $consulta_venta = "UPDATE producto SET stock = $nuevoStock WHERE idproducto = " . $producto['id'];
+            $conexion->query($consulta_venta);
+        }
+
+        // Devolver una respuesta a AJAX
+        $response = array(
+            'status' => 'success',
+            'message' => 'Venta guardada con éxito'
+        );
+
+        return json_encode($response, JSON_UNESCAPED_UNICODE);
     }
 }
