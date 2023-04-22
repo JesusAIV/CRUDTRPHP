@@ -16,7 +16,7 @@
         <div>
             <a href="" class="nav_logo">
                 <!-- <i class="fa-brands fa-html5 nav_logo-icon"></i> -->
-                <img src="<?php echo SERVERURL;?>view/img/TG2.png" width="40" class="nav_logo-icon" alt="">
+                <img src="<?php echo SERVERURL;?>view/img/TG2.png" class="nav_logo-icon" id="nav_logo-icon" alt="">
                 <span class="nav_logo-name">TGESTIONA</span>
             </a>
             <div class="nav_list">

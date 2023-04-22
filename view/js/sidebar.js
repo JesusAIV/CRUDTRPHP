@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    const showNavbar = (toggleId, navId, bodyId, headerId) => {
+    const showNavbar = (toggleId, navId, bodyId, headerId, imgId) => {
         const toggle = document.getElementById(toggleId),
             nav = document.getElementById(navId),
             bodypd = document.getElementById(bodyId),
-            headerpd = document.getElementById(headerId)
+            headerpd = document.getElementById(headerId),
+            imgpd = document.getElementById(imgId)
 
         // Validate that all variables exist
         if (toggle && nav && bodypd && headerpd) {
@@ -17,11 +18,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 bodypd.classList.toggle('body-pd')
                 // add padding to header
                 headerpd.classList.toggle('body-pd')
+
+                imgpd.style.width = "100px"
             })
         }
     }
 
-    showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
+    showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header', 'nav_logo-icon')
 
     /*===== LINK ACTIVE =====*/
     const linkColor = document.querySelectorAll('.nav_link')
@@ -33,6 +36,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     }
     linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+    document.querySelector('.fa-xmark').addEventListener('click', function() {
+        alert('hola')
+        document.querySelector('.nav_logo-icon').style.width = "30px"
+    })
 
     // Your code to run since DOM is loaded and ready
 });
