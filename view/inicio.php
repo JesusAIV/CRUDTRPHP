@@ -29,10 +29,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    
 </head>
 
-<body id="body-pd">
+<body id="body-pd <?php if($viewurl == "login" || empty($viewurl) || !isset($_SESSION['usuario'])) { echo "position-relative"; } ?>">
     <?php
         /* Prueba 01 */
         $ajax = false;
@@ -59,7 +58,7 @@
         include "./view/modulos/logout.php";
         endif;
     ?>
-    <script defer src="<?php echo SERVERURL;?>view/js/graficos.js"></script>
+    <?php if($viewurl == "inicio") { echo '<script defer src="<?php echo SERVERURL;?>view/js/graficos.js"></script>';} ?>
     <script src="<?php echo SERVERURL;?>view/js/adfunctions.js"></script>
     <script src="<?php echo SERVERURL;?>view/js/acciones.js"></script>
 </body>
