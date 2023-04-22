@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 bodypd.classList.toggle('body-pd')
                 // add padding to header
                 headerpd.classList.toggle('body-pd')
-
-                imgpd.style.width = "100px"
             })
         }
     }
@@ -36,11 +34,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     }
     linkColor.forEach(l => l.addEventListener('click', colorLink))
-
-    document.querySelector('.fa-xmark').addEventListener('click', function() {
-        alert('hola')
-        document.querySelector('.nav_logo-icon').style.width = "30px"
-    })
-
     // Your code to run since DOM is loaded and ready
 });

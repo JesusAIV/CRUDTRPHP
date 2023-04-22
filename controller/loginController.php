@@ -37,7 +37,7 @@
                     $_SESSION['usuario']=$row['usuario'];
                     $url = SERVERURL."inicio";
 
-                    return $urlLocation = '<script> window.location="'.$url.'/"</script>';
+                    return $urlLocation = '<script> window.location="'.$url.'"</script>';
                 }else{
                     $alerta=[
                         "Alerta"=>"simple",

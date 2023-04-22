@@ -29,6 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    
 </head>
 
 <body id="body-pd">
@@ -58,8 +59,8 @@
         include "./view/modulos/logout.php";
         endif;
     ?>
-    <script src="<?php echo SERVERURL;?>view/js/adfunctions.min.js"></script>
+    <script defer src="<?php echo SERVERURL;?>view/js/graficos.js"></script>
+    <script src="<?php echo SERVERURL;?>view/js/adfunctions.js"></script>
     <script src="<?php echo SERVERURL;?>view/js/acciones.js"></script>
-    <?php if($viewurl == "inicio"){ ?> <script src="<?php echo SERVERURL;?>view/js/graficos.js"></script> <?php ; } ?>
 </body>
 </html>

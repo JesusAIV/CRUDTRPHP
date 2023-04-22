@@ -10,6 +10,8 @@
 
     $(document).ready(function () {
         listarproductos();
+        $(".nav_logo-icon").css('width', '35px');
+        $(".nav_logo").css('padding-left', '14px');
 
         $("#open-modal-button").click(function () {
             crud = "agregar";
@@ -27,6 +29,26 @@
             crud = "eliminar";
             obtenerDatosProducto(filaSeleccionada, crud);
         });
+
+        $(".fa-bars").on( "click", function () {
+            var st = $(".nav_logo-icon").css('width');
+            if (st == "80px"){
+                $( ".nav_logo-icon" ).animate({
+                    width: "35px"
+                }, 1000 );
+                $( ".nav_logo" ).animate({
+                    'padding-left': "14px"
+                }, 1000 );
+            } else {
+                $( ".nav_logo-icon" ).animate({
+                    width: "80px"
+                }, 1000 );
+            }
+        });
+
+        // $(".fa-xmark").on( "click", function () {
+        //     $(".nav_logo-icon").css('width', '35px');
+        // });
 
     });
 
